@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import Http404, HttpResponseNotFound, HttpResponseRedirect
 from django.urls import reverse
 
 
@@ -7,7 +7,8 @@ monthly_challenges = {
     'january': "Learn how to do a backflip.",
     'february': "Eat only one meal a day.",
     'march': "Perform a clean rep pullup.",
-    'april': "Drink 5L of water every day.",
+    # 'april': "Drink 5L of water every day.",
+    'april': None,
     'may': "Perform a song on an instrument you never played before.",
     'june': "Learn a video editing software.",
     'july': "Name and describe a different emotion each day in a diary.",
@@ -50,4 +51,4 @@ def monthly_challenge(request, month):
         })
 
     except:
-        return HttpResponseNotFound("<h1>This ain't a month!!!!</h1>")
+        raise Http404() # automatically looks for a 404.html file in your root template folder
